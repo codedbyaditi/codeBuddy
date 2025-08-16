@@ -1,35 +1,31 @@
-import {useState} from "react";
-import styles from "./App.module.css";
-import chatbotLogo from "/chat-bot.png"; // Import the image
+import React, { useState } from 'react';
+import { Chat } from './components/Chat/Chat';
+import styles from './App.module.css';
+import { Controls } from './components/Controls/Controls';
 
 function App() {
-  const [messages,setMessages]=useState();
+  const [messages, setMessages] = useState([]);
+
+  function handleContentSend(content) {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      {content, role: 'user'}
+    ])
+  }
+
   return (
-    <div className={styles.App}>
+    <div>
       <header className={styles.Header}>
-        <img
-          className={styles.Logo}
-          src={chatbotLogo}
-          alt="Chatbot Logo"
-        />
-        <h2 className={styles.Title}>AI Chatbot</h2>
+      <img className={styles.Logo} src="/chat-bot.png" />
+      <h2 className={styles.Title}>AI Chatbot</h2>
       </header>
       <div className={styles.ChatContainer}>
-        <Chat messages={messages}/>
+        <Chat messages={messages} />
       </div>
+      <Controls onSend={handleContentSend} />
     </div>
-  );
+
+  )
 }
-const MESSAGES=[
-  {
-    role :'user',
 
-
-
-    
-    content:
-  }
-]
-
-export default App;
- 
+export default App
